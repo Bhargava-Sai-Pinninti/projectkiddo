@@ -13,6 +13,7 @@
     rgba(2, 82, 89, 0.9),
     rgba(255, 255, 255, 0)
   ), url('images/bg.jpg');">
+   <div id="preloader"></div>
 
     <div class="container">
       <nav>
@@ -76,5 +77,37 @@
         </div>
       </div>
     </div>
+    <script>
+      var loader = document.getElementById("preloader");
+      var startTime = new Date().getTime();
+      var pageLoaded = false;
+  
+      // Function to hide the preloader
+      function hidePreloader() {
+          loader.style.visibility = "hidden";
+      }
+  
+      // Function to handle when the page is fully loaded
+      function onPageLoaded() {
+          pageLoaded = true;
+          var currentTime = new Date().getTime();
+          var timeDiff = currentTime - startTime;
+          var minDisplayTime = 800; // 1 seconds
+          var remainingTime = minDisplayTime - timeDiff;
+  
+          if (remainingTime <= 0) {
+              hidePreloader();
+          } else {
+              setTimeout(hidePreloader, remainingTime);
+          }
+      }
+  
+      // Hide the preloader after 1 seconds (minimum display time)
+      setTimeout(hidePreloader, 800);
+  
+      // Check if the page is fully loaded, and if so, hide the preloader
+      window.addEventListener("load", onPageLoaded);
+  </script>
   </body>
+
 </html>
